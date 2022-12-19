@@ -1,7 +1,7 @@
 import {defineComponent} from 'vue';
 import {RouterView} from 'vue-router';
 import s from './Welcome.module.scss'
-import logo from '../assets/icons/mangosteen.svg'
+import logo from '../assets/icons/orange.svg'
 
 export const Welcome = defineComponent({
   setup: (props, context) => {
@@ -10,7 +10,7 @@ export const Welcome = defineComponent({
         <img src={logo}/>
         <h1>橘子记账</h1>
       </header>
-      <main><RouterView/></main>
+      <main class={s.main}><RouterView/></main>
     </div>
   }
 });
