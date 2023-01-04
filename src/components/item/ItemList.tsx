@@ -1,10 +1,11 @@
-import {defineComponent, PropType, reactive, ref} from 'vue';
+import {defineComponent, PropType, reactive, ref, watchEffect} from 'vue';
 import {MainLayout} from '../../layouts/MainLayout';
 import {Icon} from '../../shared/Icon';
 import {Tab, Tabs} from '../../shared/Tabs';
 import s from './ItemList.module.scss';
 import {Time} from '../../shared/time';
 import {ItemSummary} from './ItemSummary';
+import {Overlay} from 'vant';
 
 export const ItemList = defineComponent({
   props: {
@@ -14,11 +15,11 @@ export const ItemList = defineComponent({
   },
   setup: (props, context) => {
     const refSelected = ref('本月');
-    const time = new Time()
+    const time = new Time();
     const customTime = reactive({
       start: new Time(),
       end: new Time()
-    })
+    });
     const timeList = [
       {
         start: time.firstDayOfMonth(),
@@ -32,13 +33,20 @@ export const ItemList = defineComponent({
         start: time.firstDayOfYear(),
         end: time.lastDayOfYear()
       }
-    ]
+    ];
+    watchEffect(() => {
+        if (refSelected.value === '自定义时间') {
+          refOverlayVisible.value = true;
+        }
+      }
+    );
+    const refOverlayVisible = ref(false);
     return () => (
       <MainLayout>{
         {
           title: () => '山竹记账',
           icon: () => <Icon name="menu"/>,
-          default: () => (
+          default: () => <>
             <Tabs classPrefix={'customTabs'} v-model:selected={refSelected.value}>
               <Tab name="本月">
                 <ItemSummary
@@ -61,7 +69,24 @@ export const ItemList = defineComponent({
                   endDate={customTime.end.format()}/>
               </Tab>
             </Tabs>
-          )
+            <Overlay show={refOverlayVisible.value} class={s.overlay}>
+              <div class={s.overlay_inner}>
+                <header>
+                  请选择时间
+                </header>
+                <main>
+                  <form>
+                    <div>
+
+                    </div>
+                    <div>
+
+                    </div>
+                  </form>
+                </main>
+              </div>
+            </Overlay>
+          </>
         }
       }</MainLayout>
     );
