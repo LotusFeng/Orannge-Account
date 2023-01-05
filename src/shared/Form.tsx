@@ -34,6 +34,7 @@ export const FormItem = defineComponent({
       type: String
     }
   },
+  emits: ['update:selected'],
   setup: (props, context) => {
     const refDateVisible = ref(false);
     const content = computed(() => {
