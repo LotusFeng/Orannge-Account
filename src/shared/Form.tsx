@@ -1,9 +1,8 @@
-import {computed, defineComponent, PropType, ref, VNode} from 'vue';
-import {EmojiSelect} from './EmojiSelect';
-import {Time} from './time';
-import {DatetimePicker, Popup} from 'vant';
+import { DatetimePicker, Popup } from 'vant';
+import { computed, defineComponent, PropType, ref, VNode } from 'vue';
+import { EmojiSelect } from './EmojiSelect';
 import s from './Form.module.scss';
-
+import { Time } from './time';
 export const Form = defineComponent({
   props: {
     onSubmit: {
@@ -15,9 +14,9 @@ export const Form = defineComponent({
       <form class={s.form} onSubmit={props.onSubmit}>
         {context.slots.default?.()}
       </form>
-    );
+    )
   }
-});
+})
 
 export const FormItem = defineComponent({
   props: {
@@ -34,21 +33,21 @@ export const FormItem = defineComponent({
       type: String
     }
   },
-  emits: ['update:selected'],
+  emits: ['update:modelValue'],
   setup: (props, context) => {
-    const refDateVisible = ref(false);
+    const refDateVisible = ref(false)
     const content = computed(() => {
       switch (props.type) {
         case 'text':
           return <input
             value={props.modelValue}
             onInput={(e: any) => context.emit('update:modelValue', e.target.value)}
-            class={[s.formItem, s.input]}/>;
+            class={[s.formItem, s.input]} />
         case 'emojiSelect':
           return <EmojiSelect
             modelValue={props.modelValue?.toString()}
             onUpdateModelValue={value => context.emit('update:modelValue', value)}
-            class={[s.formItem, s.emojiList, s.error]}/>;
+            class={[s.formItem, s.emojiList, s.error]} />
         case 'date':
           return <>
             <input readonly={true} value={props.modelValue}
@@ -63,9 +62,9 @@ export const FormItem = defineComponent({
                               onCancel={() => refDateVisible.value = false} />
             </Popup></>
         case undefined:
-          return context.slots.default?.();
+          return context.slots.default?.()
       }
-    });
+    })
     return () => {
       return <div class={s.formRow}>
         <label class={s.formLabel}>
@@ -81,7 +80,7 @@ export const FormItem = defineComponent({
             </div>
           }
         </label>
-      </div>;
-    };
+      </div>
+    }
   }
-});
+})
