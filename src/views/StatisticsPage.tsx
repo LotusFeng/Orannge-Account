@@ -1,13 +1,10 @@
-import {defineComponent, PropType} from 'vue';
-import {Charts} from '../components/statistics/Charts';
-import {TimeTabsLayout} from '../layouts/TimeTabsLayout';
-import s from './StatisticsPage.module.scss';
-
+import { defineComponent } from 'vue';
+import { Charts } from '../components/statistics/Charts';
+import { TimeTabsLayout } from '../layouts/TimeTabsLayout';
 export const StatisticsPage = defineComponent({
   setup: (props, context) => {
     return () => (
-      // @ts-ignore
-      <TimeTabsLayout component={Charts}/>
-    );
+      <TimeTabsLayout component={Charts} />
+    )
   }
-});
+})

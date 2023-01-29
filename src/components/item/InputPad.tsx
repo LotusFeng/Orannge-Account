@@ -1,9 +1,8 @@
-import {defineComponent, PropType, ref} from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
+import { Icon } from '../../shared/Icon';
+import { Time } from '../../shared/time';
 import s from './InputPad.module.scss';
-import {Icon} from '../../shared/Icon';
-import {Time} from '../../shared/time';
-import { DatetimePicker, Popup } from 'vant';
-
+import { DatetimePicker, NumberKeyboard, Popup } from 'vant';
 export const InputPad = defineComponent({
   props: {
     name: {
@@ -20,16 +19,16 @@ export const InputPad = defineComponent({
         return
       }
       if (dotIndex >= 0 && refAmount.value.length - dotIndex > 2) {
-        return;
+        return
       }
       if (nString === '.') {
-        if (dotIndex >= 0 ) { //已有小数点
-          return;
+        if (dotIndex >= 0) { // 已经有小数点了
+          return
         }
       } else if (nString === '0') {
-        if (dotIndex === -1 ) { //没有小数点
-          if (refAmount.value === '0'){ //没有小数点，但有0
-            return;
+        if (dotIndex === -1) { // 没有小数点
+          if (refAmount.value === '0') { // 没小数点，但是有0
+            return
           }
         }
       } else {
@@ -51,7 +50,7 @@ export const InputPad = defineComponent({
       { text: '9', onClick: () => { appendText(9) } },
       { text: '.', onClick: () => { appendText('.') } },
       { text: '0', onClick: () => { appendText(0) } },
-      { text: '清空', onClick: () => { refAmount.value = '0'} },
+      { text: '清空', onClick: () => { refAmount.value = '0' } },
       { text: '提交', onClick: () => { } },
     ]
     const refDatePickerVisible = ref(false)
@@ -62,12 +61,13 @@ export const InputPad = defineComponent({
     return () => <>
       <div class={s.dateAndAmount}>
         <span class={s.date}>
-          <Icon name="date" class={s.icon}/>
+          <Icon name="date" class={s.icon} />
           <span>
             <span onClick={showDatePicker}>{new Time(refDate.value).format()}</span>
             <Popup position='bottom' v-model:show={refDatePickerVisible.value}>
               <DatetimePicker value={refDate.value} type="date" title="选择年月日"
-                              onConfirm={setDate} onCancel={hideDatePicker}/>
+                onConfirm={setDate} onCancel={hideDatePicker}
+              />
             </Popup>
           </span>
         </span>
@@ -78,6 +78,6 @@ export const InputPad = defineComponent({
           <button onClick={button.onClick}>{button.text}</button>
         )}
       </div>
-    </>;
+    </>
   }
-});
+})

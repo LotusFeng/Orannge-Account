@@ -1,13 +1,12 @@
-.wraper{
-
+.wrapper {
 }
-.overlay{
+.overlay {
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid red;
   background: var(--overlay-mask-bg);
-  &_inner{
+  &_inner {
     background: var(--bg);
     width: 80vw;
     > header {
@@ -15,7 +14,7 @@
       padding: 12px 16px;
       color: var(--dialog-header-text);
     }
-    >main{
+    > main {
     }
   }
 }

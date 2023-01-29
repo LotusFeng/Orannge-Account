@@ -1,6 +1,5 @@
 .wrapper {
 }
-
 .dateAndAmount {
   background: var(--overlay-bg);
   display: flex;
@@ -9,27 +8,24 @@
   padding: 16px;
   font-family: monospace;
   border-top: 1px solid var(--button-border-color);
-
   > .date {
     font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: start;
     color: var(--date-text);
-
     .icon {
       width: 24px;
       height: 24px;
       margin-right: 8px;
+      fill: var(--amount-text);
     }
   }
-
   > .amount {
     font-size: 20px;
     color: var(--amount-text);
   }
 }
-
 .buttons {
   display: grid;
   grid-template-areas:
@@ -40,7 +36,7 @@
   grid-auto-rows: 48px;
   grid-auto-columns: 1fr;
   gap: 1px;
-  flex-wrap: wrap ;
+  flex-wrap: wrap;
   background: var(--button-border-color);
   border-top: 1px solid var(--button-border-color);
   > button {

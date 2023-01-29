@@ -1,28 +1,23 @@
-import {defineComponent, ref} from 'vue';
-import {RouterLink} from 'vue-router';
-import {Button} from '../shared/Button';
-import {Center} from '../shared/Center';
-import {FloatButton} from '../shared/FloatButton';
-import {Icon} from '../shared/Icon';
+import { defineComponent, ref } from 'vue';
+import { RouterLink } from 'vue-router';
+import { MainLayout } from '../layouts/MainLayout';
+import { Button } from '../shared/Button';
+import { Center } from '../shared/Center';
+import { FloatButton } from '../shared/FloatButton';
+import { Icon } from '../shared/Icon';
+import { Navbar } from '../shared/Navbar';
+import { Overlay, OverlayIcon } from '../shared/Overlay';
 import s from './StartPage.module.scss';
-import {Navbar} from '../shared/Navbar';
-import {Overlay, OverlayIcon} from '../shared/Overlay';
-import {MainLayout} from '../layouts/MainLayout';
-
 export const StartPage = defineComponent({
   setup: (props, context) => {
-    const refOverlayVisible = ref(false);
-    const onClickMenu = () => {
-      refOverlayVisible.value = !refOverlayVisible.value;
-    };
     return () => (
       <MainLayout>{
         {
           title: () => '山竹记账',
-          icon: () => <OverlayIcon/>,
+          icon: () => <OverlayIcon />,
           default: () => <>
             <Center class={s.pig_wrapper}>
-              <Icon name="pig" class={s.pig}/>
+              <Icon name="pig" class={s.pig} />
             </Center>
             <div class={s.button_wrapper}>
               <RouterLink to="/items/create">
@@ -30,12 +25,11 @@ export const StartPage = defineComponent({
               </RouterLink>
             </div>
             <RouterLink to="/items/create">
-              <FloatButton iconName="add"/>
+              <FloatButton iconName='add' />
             </RouterLink>
           </>
         }
       }</MainLayout>
-
-    );
+    )
   }
-});
+})

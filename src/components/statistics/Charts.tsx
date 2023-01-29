@@ -1,9 +1,9 @@
-import {defineComponent, PropType, ref} from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
+import { FormItem } from '../../shared/Form';
 import s from './Charts.module.scss';
-import {FormItem} from '../../shared/Form';
-import {LineChart} from './LineChart';
-import {PieChart} from './PieChart';
-import {Bar} from './Bar';
+import { LineChart } from './LineChart';
+import { PieChart } from './PieChart';
+import { Bars } from './Bars';
 
 export const Charts = defineComponent({
   props: {
@@ -13,6 +13,7 @@ export const Charts = defineComponent({
     },
     endDate: {
       type: String as PropType<string>,
+      required: true
     }
   },
   setup: (props, context) => {
@@ -20,13 +21,13 @@ export const Charts = defineComponent({
     return () => (
       <div class={s.wrapper}>
         <FormItem label='类型' type="select" options={[
-          { value: 'expenses', text: '支出'},
-          { value: 'income', text: '收入'}
-        ]} v-model={category.value}/>
-        <LineChart/>
-        <PieChart/>
-        <Bar/>
+          { value: 'expenses', text: '支出' },
+          { value: 'income', text: '收入' }
+        ]} v-model={category.value} />
+        <LineChart />
+        <PieChart />
+        <Bars />
       </div>
-    );
+    )
   }
-});
+})

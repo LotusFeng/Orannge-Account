@@ -1,5 +1,6 @@
-.wrappere{}
-.total{
+.wrapper {
+}
+.total {
   background: var(--total-bg);
   display: flex;
   justify-content: space-between;
@@ -12,16 +13,16 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    &:first-child{
+    &:first-child {
       color: var(--total-income);
     }
-    &:nth-child(2){
+    &:nth-child(2) {
       color: var(--total-expenses);
     }
   }
 }
 .list{
-  >li{
+  > li {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -52,7 +53,7 @@
         color: var(--list-tag-text);
       }
       .amount{
-        color:var(--list-amount-text)
+        color: var(--list-amount-text);
       }
     }
     .time{

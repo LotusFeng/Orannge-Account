@@ -1,7 +1,6 @@
-import {defineComponent, PropType} from 'vue';
+import { defineComponent, PropType } from 'vue';
+import { FloatButton } from '../../shared/FloatButton';
 import s from './ItemSummary.module.scss';
-import {FloatButton} from '../../shared/FloatButton';
-
 export const ItemSummary = defineComponent({
   props: {
     startDate: {
@@ -18,8 +17,8 @@ export const ItemSummary = defineComponent({
       <div class={s.wrapper}>
         <ul class={s.total}>
           <li><span>收入</span><span>128</span></li>
-          <li><span>支出</span><span>128</span></li>
-          <li><span>净收入</span><span>128</span></li>
+          <li><span>支出</span><span>99</span></li>
+          <li><span>净收入</span><span>39</span></li>
         </ul>
         <ol class={s.list}>
           <li>

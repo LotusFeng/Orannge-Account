@@ -47,7 +47,7 @@ export const EmojiSelect = defineComponent({
       return selectedItem.map(category =>
         emojiList.find(item => item[0] === category)?.[1]
           .map(item => <li class={item === props.modelValue ? s.selectedEmoji : ''}
-                           onClick={() => onClickEmoji(item)}>{item}</li>)
+            onClick={() => onClickEmoji(item)}>{item}</li>)
       )
     })
     return () => (
@@ -55,7 +55,7 @@ export const EmojiSelect = defineComponent({
         <nav>
           {table.map((item, index) =>
             <span class={index === refSelected.value ? s.selected : ''}
-                  onClick={() => onClickTab(index)}>{item[0]}</span>)}
+              onClick={() => onClickTab(index)}>{item[0]}</span>)}
         </nav>
         <ol>
           {emojis.value}

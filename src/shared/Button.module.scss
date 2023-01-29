@@ -1,4 +1,4 @@
-.button{
+.button {
   border: 1px solid var(--button-bg);
   padding: 8px 16px;
   background: var(--button-bg);
@@ -10,11 +10,11 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
-  &normal{
-
+  &.normal {
   }
-  &.important{}
-  &.danger{
+  &.important {
+  }
+  &.danger {
     background: var(--button-bg-danger);
     border-color: var(--button-bg-danger);
   }

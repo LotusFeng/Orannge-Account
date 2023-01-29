@@ -4,7 +4,6 @@ type Point = {
   x: number;
   y: number;
 }
-
 interface Options {
   beforeStart?: (e: TouchEvent) => void
   afterStart?: (e: TouchEvent) => void
