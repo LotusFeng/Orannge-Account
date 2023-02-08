@@ -1,12 +1,12 @@
-import { Overlay } from 'vant';
-import { Component, DefineComponent, defineComponent, PropType, reactive, ref } from 'vue';
-import { ItemSummary } from '../components/item/ItemSummary';
-import { Form, FormItem } from '../shared/Form';
-import { OverlayIcon } from '../shared/Overlay';
-import { Tab, Tabs } from '../shared/Tabs';
-import { Time } from '../shared/time';
-import s from './TimeTabsLayout.module.scss';
-import { MainLayout } from './MainLayout';
+import { Overlay } from 'vant'
+import { Component, DefineComponent, defineComponent, PropType, reactive, ref } from 'vue'
+import { ItemSummary } from '../components/item/ItemSummary'
+import { Form, FormItem } from '../shared/Form'
+import { OverlayIcon } from '../shared/Overlay'
+import { Tab, Tabs } from '../shared/Tabs'
+import { Time } from '../shared/time'
+import s from './TimeTabsLayout.module.scss'
+import { MainLayout } from './MainLayout'
 const demo = defineComponent({
   props: {
     startDate: {
@@ -16,7 +16,7 @@ const demo = defineComponent({
     endDate: {
       type: String as PropType<string>,
       required: false
-    },
+    }
   }
 })
 export const TimeTabsLayout = defineComponent({
