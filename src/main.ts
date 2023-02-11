@@ -5,8 +5,15 @@ import { createRouter } from 'vue-router'
 import { history } from './shared/history';
 import '@svgstore';
 import { fetchMe, mePromise } from './shared/me';
+import {createPinia} from 'pinia';
 
 const router = createRouter({ history, routes })
+const pinia = createPinia()
+const app = createApp(App)
+app.use(router)
+app.use(pinia)
+app.mount('#app')
+
 
 fetchMe()
 
@@ -33,6 +40,4 @@ router.beforeEach((to, from) => {
   )
 })
 
-const app = createApp(App)
-app.use(router)
-app.mount('#app')
+

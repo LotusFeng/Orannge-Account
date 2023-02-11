@@ -1,19 +1,19 @@
-import axios, { AxiosResponse } from 'axios';
-import { defineComponent, PropType, reactive, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { useBool } from '../hooks/useBool';
-import { MainLayout } from '../layouts/MainLayout';
-import { Button } from '../shared/Button';
-import { Form, FormItem } from '../shared/Form';
-import { history } from '../shared/history';
-import { http } from '../shared/Http';
-import { Icon } from '../shared/Icon';
-import { refreshMe } from '../shared/me';
-import { hasError, validate } from '../shared/validate';
+import {defineComponent, reactive, ref} from 'vue';
+import {useRoute, useRouter} from 'vue-router';
+import {useBool} from '../hooks/useBool';
+import {MainLayout} from '../layouts/MainLayout';
+import {Button} from '../shared/Button';
+import {Form, FormItem} from '../shared/Form';
+import {http} from '../shared/Http';
+import {Icon} from '../shared/Icon';
+import {hasError, validate} from '../shared/validate';
 import s from './SignInPage.module.scss';
 import {BackIcon} from '../shared/BackIcon';
+import {useMeStore} from '../stores/useMeStore';
+
 export const SignInPage = defineComponent({
   setup: (props, context) => {
+    const meStore = useMeStore()
     const formData = reactive({
       email: '',
       code: ''
@@ -43,7 +43,7 @@ export const SignInPage = defineComponent({
         localStorage.setItem('jwt', response.data.jwt)
         // router.push('/sign_in?return_to='+ encodeURIComponent(route.fullPath))
         const returnTo = route.query.return_to?.toString()
-        refreshMe()
+        meStore.refreshMe()
         router.push(returnTo || '/')
       }
     }
