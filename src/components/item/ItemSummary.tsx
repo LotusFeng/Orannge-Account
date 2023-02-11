@@ -8,6 +8,7 @@ import { Money } from '../../shared/Money'
 import {Datetime} from '../../shared/Datetime';
 import {Center} from '../../shared/Center';
 import {Icon} from '../../shared/Icon';
+import {useAfterMe} from '../../hooks/useAfterMe';
 export const ItemSummary = defineComponent({
   props: {
     startDate: {
@@ -37,7 +38,7 @@ export const ItemSummary = defineComponent({
       hasMore.value = (pager.page - 1) * pager.per_page + resources.length < pager.count
       page.value += 1
     }
-    onMounted(fetchItems)
+    useAfterMe(fetchItems)
     watch(()=>[props.startDate,props.endDate], ()=>{
       items.value = []
       hasMore.value = false
@@ -59,7 +60,7 @@ export const ItemSummary = defineComponent({
       })
       Object.assign(itemsBalance, response.data)
     }
-    onMounted(fetchItemBalance)
+    useAfterMe(fetchItemBalance)
     watch(()=>[props.startDate,props.endDate], ()=>{
       Object.assign(itemsBalance, {
         expenses: 0, income: 0, balance: 0
@@ -92,7 +93,7 @@ export const ItemSummary = defineComponent({
                   </div>
                   <div class={s.text}>
                     <div class={s.tagAndAmount}>
-                      <span className={s.tag}>{item.tags && item.tags.length > 0 ? item.tags[0].name : '未分类'}</span>
+                      <span class={s.tag}>{item.tags && item.tags.length > 0 ? item.tags[0].name : '未分类'}</span>
                       <span class={s.amount}>￥<Money value={item.amount}/></span>
                     </div>
                     <div class={s.time}><Datetime value={item.happen_at}/></div>

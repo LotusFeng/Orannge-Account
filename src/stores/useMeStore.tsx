@@ -1,6 +1,6 @@
-import {defineStore} from 'pinia';
-import {AxiosResponse} from 'axios';
-import {http} from '../shared/Http';
+import { AxiosResponse } from 'axios'
+import { defineStore } from 'pinia'
+import { http } from '../shared/Http'
 
 type MeState = {
   me?: User
@@ -11,7 +11,7 @@ type MeActions = {
   fetchMe: () => void
 }
 export const useMeStore = defineStore<string, MeState, {}, MeActions>('me', {
-  state: ()=>({
+  state: () => ({
     me: undefined,
     mePromise: undefined
   }),
@@ -19,7 +19,7 @@ export const useMeStore = defineStore<string, MeState, {}, MeActions>('me', {
     refreshMe() {
       this.mePromise = http.get<Resource<User>>('/me')
     },
-    fetchMe(){
+    fetchMe() {
       this.refreshMe()
     }
   }

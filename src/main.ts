@@ -16,6 +16,7 @@ app.mount('#app')
 
 const meStore = useMeStore()
 const {mePromise} = storeToRefs(meStore)
+meStore.fetchMe()
 
 const whiteList: Record<string, 'exact' | 'startsWith'> = {
   '/': 'exact',
