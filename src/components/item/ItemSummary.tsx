@@ -29,7 +29,7 @@ export const ItemSummary = defineComponent({
       () => [props.startDate, props.endDate],
       () => {
         itemStore.$reset();
-        itemStore.fetchItems(props.startDate, props.endDate)
+        itemStore.fetchItems(props.startDate, props.endDate);
       }
     );
     const itemsBalance = reactive({
@@ -63,15 +63,15 @@ export const ItemSummary = defineComponent({
               <ul class={s.total}>
                 <li>
                   <span>收入</span>
-                  <Money value={itemsBalance.income} />
+                  <Money value={itemsBalance.income}/>
                 </li>
                 <li>
                   <span>支出</span>
-                  <Money value={itemsBalance.expenses} />
+                  <Money value={itemsBalance.expenses}/>
                 </li>
                 <li>
                   <span>净收入</span>
-                  <Money value={itemsBalance.balance} />
+                  <Money value={itemsBalance.balance}/>
                 </li>
               </ul>
               <ol class={s.list}>
@@ -84,11 +84,11 @@ export const ItemSummary = defineComponent({
                       <div class={s.tagAndAmount}>
                         <span class={s.tag}>{item.tags && item.tags.length > 0 ? item.tags[0].name : '未分类'}</span>
                         <span class={s.amount}>
-                          ￥<Money value={item.amount} />
+                          ￥<Money value={item.amount}/>
                         </span>
                       </div>
                       <div class={s.time}>
-                        <Datetime value={item.happen_at} />
+                        <Datetime value={item.happen_at}/>
                       </div>
                     </div>
                   </li>
@@ -104,8 +104,9 @@ export const ItemSummary = defineComponent({
             </>
           ) : (
             <>
-              <Center class={s.pig_wrapper}>
+              <Center class={s.pig_wrapper} direction="|">
                 <Icon name="pig" class={s.pig} />
+                <p>目前没有数据</p>
               </Center>
               <div class={s.button_wrapper}>
                 <RouterLink to="/items/create">
@@ -115,9 +116,9 @@ export const ItemSummary = defineComponent({
             </>
           )}
           <RouterLink to="/items/create">
-            <FloatButton iconName="add" />
+            <FloatButton iconName="add"/>
           </RouterLink>
         </div>
-      )
+      );
   }
-})
+});
