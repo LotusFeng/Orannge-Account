@@ -24,6 +24,7 @@ type Resources<T = any> = {
     count: number
   }
 }
+declare var DEBUG: boolean
 type Item = {
   id: number
   user_id: number

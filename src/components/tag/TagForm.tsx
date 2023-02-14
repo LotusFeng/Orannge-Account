@@ -1,12 +1,12 @@
-import {defineComponent, onMounted, PropType, reactive, toRaw} from 'vue';
+import { defineComponent, onMounted, PropType, reactive, toRaw } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import { Button } from '../../shared/Button';
 import { EmojiSelect } from '../../shared/EmojiSelect';
 import { Form, FormItem } from '../../shared/Form';
-import {hasError, Rules, validate} from '../../shared/validate';
+import { http } from '../../shared/Http';
+import { onFormError } from '../../shared/onFormError';
+import { hasError, Rules, validate } from '../../shared/validate';
 import s from './Tag.module.scss';
-import {useRoute, useRouter} from 'vue-router';
-import {http} from '../../shared/Http';
-import {onFormError} from '../../shared/onFormError';
 export const TagForm = defineComponent({
   props: {
     id: Number
@@ -17,7 +17,7 @@ export const TagForm = defineComponent({
       id: undefined,
       name: '',
       sign: '',
-      kind: route.query.kind!.toString() as ('expense' | 'income'),
+      kind: route.query.kind!.toString() as ('expenses' | 'income'),
     })
     const errors = reactive<FormErrors<typeof formData>>({})
     const router = useRouter()
@@ -35,8 +35,8 @@ export const TagForm = defineComponent({
       Object.assign(errors, validate(formData, rules))
       if(!hasError(errors)){
         const promise = await formData.id ?
-          http.patch(`/tags/${formData.id}`, formData, { _mock: 'tagEdit',_autoLoading:true }) :
-          http.post('/tags', formData, { _mock: 'tagCreate',_autoLoading:true })
+          http.patch(`/tags/${formData.id}`, formData, { _mock: 'tagEdit', _autoLoading: true }) :
+          http.post('/tags', formData, { _mock: 'tagCreate', _autoLoading: true })
         await promise.catch((error)=>
           onFormError(error, (data)=> Object.assign(errors, data.errors))
         )
@@ -53,12 +53,12 @@ export const TagForm = defineComponent({
     return () => (
       <Form onSubmit={onSubmit}>
         <FormItem label='标签名（最多 4 个字符）'
-          type="text"
-          v-model={formData.name}
-          error={errors['name']?.[0]} />
+                  type="text"
+                  v-model={formData.name}
+                  error={errors['name']?.[0]} />
         <FormItem label={'符号 ' + formData.sign}
-          type="emojiSelect" v-model={formData.sign}
-          error={errors['sign']?.[0]} />
+                  type="emojiSelect" v-model={formData.sign}
+                  error={errors['sign']?.[0]} />
         <FormItem>
           <p class={s.tips}>记账时长按标签即可进行编辑</p>
         </FormItem>
