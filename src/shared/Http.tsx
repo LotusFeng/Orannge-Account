@@ -1,14 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import {
-  mockItemCreate,
-  mockItemIndex,
-  mockItemIndexBalance, mockItemSummary,
-  mockSession,
-  mockTagEdit,
-  mockTagIndex,
-  mockTagShow
-} from '../mock/mock';
-import {Toast} from 'vant';
+import { Toast } from "vant";
+import { mockItemCreate, mockItemIndex, mockItemIndexBalance, mockItemSummary, mockSession, mockTagEdit, mockTagIndex, mockTagShow } from "../mock/mock";
 
 type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
 type PostConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>
@@ -43,8 +35,6 @@ const mock = (response: AxiosResponse) => {
   switch (response.config?._mock) {
     case 'tagIndex':
       [response.status, response.data] = mockTagIndex(response.config)
-      console.log('response')
-      console.log(response)
       return true
     case 'session':
       [response.status, response.data] = mockSession(response.config)
@@ -82,6 +72,9 @@ export const http = new Http( isDev() ? 'api/v1' : 'http://121.196.236.94:3000/a
 
 http.instance.interceptors.request.use(config => {
   const jwt = localStorage.getItem('jwt')
+  if (jwt) {
+    config.headers!.Authorization = `Bearer ${jwt}`
+  }
   if(config._autoLoading === true){
     Toast.loading({
       message: '加载中...',
@@ -91,6 +84,7 @@ http.instance.interceptors.request.use(config => {
   }
   return config
 })
+
 http.instance.interceptors.response.use((response)=>{
   if(response.config._autoLoading === true){
     Toast.clear();
@@ -102,6 +96,7 @@ http.instance.interceptors.response.use((response)=>{
   }
   throw error
 })
+
 http.instance.interceptors.response.use((response) => {
   mock(response)
   if (response.status >= 400) {

@@ -56,6 +56,6 @@ export const routes: RouteRecordRaw[] = [
   }, {
     path: '/export', component: ()=> import('../shared/ComingSoon')
   }, {
-    path: 'notify', component: ComingSoon
+    path: '/notify', component: ComingSoon
   }
 ];
