@@ -13,8 +13,8 @@ export const ComingSoon = defineComponent({
     }
     return () => (
       <div>
-        <Center class={s.pig_wrapper}>
-          <Icon name="pig" class={s.pig}/>
+        <Center class={s.orange_wrapper}>
+          <Icon name="orange" class={s.orange}/>
         </Center>
         <p class={s.text}>敬请期待</p>
         <p class={s.link}>

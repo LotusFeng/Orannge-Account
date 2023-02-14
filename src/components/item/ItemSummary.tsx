@@ -104,8 +104,8 @@ export const ItemSummary = defineComponent({
             </>
           ) : (
             <>
-              <Center class={s.pig_wrapper} direction="|">
-                <Icon name="pig" class={s.pig} />
+              <Center class={s.orange_wrapper} direction="|">
+                <Icon name="orange" class={s.orange} />
                 <p>目前没有数据</p>
               </Center>
               <div class={s.button_wrapper}>

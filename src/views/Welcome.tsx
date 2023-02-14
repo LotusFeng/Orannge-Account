@@ -28,9 +28,9 @@ export const Welcome = defineComponent({
     return () => <div class={s.wrapper}>
       <header>
         <svg>
-          <use xlinkHref='#mangosteen'></use>
+          <use xlinkHref='#orange'></use>
         </svg>
-        <h1>山竹记账</h1>
+        <h1 class={s.text}>橘子记账</h1>
       </header>
       <main class={s.main} ref={main}>
         <RouterView name="main">
