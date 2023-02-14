@@ -1,11 +1,13 @@
-import {routes} from './config/routes';
-import {createApp} from 'vue';
-import {App} from './App';
-import {createRouter} from 'vue-router';
-import {history} from './shared/history';
+import { useMeStore } from './stores/useMeStore';
+import { routes } from './config/routes';
+import { createApp } from 'vue'
+import { App } from './App'
+import { createRouter } from 'vue-router'
+import { history } from './shared/history';
 import '@svgstore';
-import {createPinia, storeToRefs} from 'pinia';
-import {useMeStore} from './stores/useMeStore';
+import { createPinia, storeToRefs } from 'pinia';
+import { Dialog } from 'vant';
+
 
 const router = createRouter({ history, routes })
 const pinia = createPinia()
@@ -15,8 +17,10 @@ app.use(pinia)
 app.mount('#app')
 
 const meStore = useMeStore()
-const {mePromise} = storeToRefs(meStore)
+const { mePromise } = storeToRefs(meStore)
 meStore.fetchMe()
+
+
 
 const whiteList: Record<string, 'exact' | 'startsWith'> = {
   '/': 'exact',
@@ -40,5 +44,4 @@ router.beforeEach((to, from) => {
     () => '/sign_in?return_to=' + from.path
   )
 })
-
 

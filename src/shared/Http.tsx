@@ -62,15 +62,15 @@ http.instance.interceptors.response.use(
 if (DEBUG) {
   import('../mock/mock').then(
     ({
-       mockItemCreate,
-       mockItemIndex,
-       mockItemIndexBalance,
-       mockItemSummary,
-       mockSession,
-       mockTagEdit,
-       mockTagIndex,
-       mockTagShow
-     }) => {
+      mockItemCreate,
+      mockItemIndex,
+      mockItemIndexBalance,
+      mockItemSummary,
+      mockSession,
+      mockTagEdit,
+      mockTagIndex,
+      mockTagShow
+    }) => {
       const mock = (response: AxiosResponse) => {
         switch (response.config?._mock) {
           case 'tagIndex':

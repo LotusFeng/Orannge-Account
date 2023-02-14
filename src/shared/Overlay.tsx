@@ -1,14 +1,14 @@
-import {defineComponent, onMounted, PropType, ref} from 'vue';
-import {RouterLink, useRoute} from 'vue-router';
-import { Icon } from './Icon';
-import s from './Overlay.module.scss';
-import {Dialog} from 'vant';
-import {useMeStore} from '../stores/useMeStore';
+import { Dialog } from 'vant'
+import { defineComponent, onMounted, PropType, ref } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
+import { useMeStore } from '../stores/useMeStore'
+import { Icon } from './Icon'
+import s from './Overlay.module.scss'
 export const Overlay = defineComponent({
   props: {
     onClose: {
-      type: Function as PropType<() => void>
-    }
+      type: Function as PropType<() => void>,
+    },
   },
   setup: (props) => {
     const meStore = useMeStore()
@@ -17,14 +17,14 @@ export const Overlay = defineComponent({
     }
     const route = useRoute()
     const me = ref<User>()
-    onMounted(async ()=>{
+    onMounted(async () => {
       const response = await meStore.mePromise
       me.value = response?.data.resource
     })
     const onSignOut = async () => {
       await Dialog.confirm({
         title: '确认',
-        message: '你真的要退出登录吗？'
+        message: '你真的要退出登录吗？',
       })
       localStorage.removeItem('jwt')
       window.location.reload()
@@ -80,19 +80,19 @@ export const Overlay = defineComponent({
   },
 })
 
-
 export const OverlayIcon = defineComponent({
   setup: () => {
     const refOverlayVisible = ref(false)
     const onClickMenu = () => {
       refOverlayVisible.value = !refOverlayVisible.value
     }
-    return () => <>
-      <Icon name="menu" class={s.icon} onClick={onClickMenu} />
-      {refOverlayVisible.value &&
-        <Overlay onClose={() => refOverlayVisible.value = false} />
-      }
-    </>
-
-  }
+    return () => (
+      <>
+        <Icon name="menu" class={s.icon} onClick={onClickMenu} />
+        {refOverlayVisible.value && (
+          <Overlay onClose={() => (refOverlayVisible.value = false)} />
+        )}
+      </>
+    )
+  },
 })

@@ -1,9 +1,9 @@
-import {onMounted} from 'vue';
-import {useMeStore} from '../stores/useMeStore';
+import { onMounted } from 'vue'
+import { useMeStore } from '../stores/useMeStore'
 
 export const useAfterMe = (fn: () => void) => {
-  const meStore = useMeStore();
+  const meStore = useMeStore()
   onMounted(() => {
-    meStore.mePromise!.then(fn, () => undefined);
-  });
-};
+    meStore.mePromise!.then(fn, ()=> undefined)
+  })
+}

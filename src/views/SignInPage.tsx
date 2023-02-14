@@ -1,16 +1,15 @@
-import {defineComponent, reactive, ref} from 'vue';
-import {useRoute, useRouter} from 'vue-router';
-import {useBool} from '../hooks/useBool';
-import {MainLayout} from '../layouts/MainLayout';
-import {Button} from '../shared/Button';
-import {Form, FormItem} from '../shared/Form';
-import {http} from '../shared/Http';
-import {Icon} from '../shared/Icon';
-import {hasError, validate} from '../shared/validate';
+import { defineComponent, reactive, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useBool } from '../hooks/useBool';
+import { MainLayout } from '../layouts/MainLayout';
+import { BackIcon } from '../shared/BackIcon';
+import { Button } from '../shared/Button';
+import { Form, FormItem } from '../shared/Form';
+import { http } from '../shared/Http';
+import { Icon } from '../shared/Icon';
+import { hasError, validate } from '../shared/validate';
+import { useMeStore } from '../stores/useMeStore';
 import s from './SignInPage.module.scss';
-import {BackIcon} from '../shared/BackIcon';
-import {useMeStore} from '../stores/useMeStore';
-
 export const SignInPage = defineComponent({
   setup: (props, context) => {
     const meStore = useMeStore()
@@ -37,11 +36,9 @@ export const SignInPage = defineComponent({
         { key: 'code', type: 'required', message: '必填' },
       ]))
       if (!hasError(errors)) {
-        const response = await http.post<{ jwt: string }>('/session', formData,{_autoLoading:true})
+        const response = await http.post<{ jwt: string }>('/session', formData, {_autoLoading: true})
           .catch(onError)
-        console.log(response)
         localStorage.setItem('jwt', response.data.jwt)
-        // router.push('/sign_in?return_to='+ encodeURIComponent(route.fullPath))
         const returnTo = route.query.return_to?.toString()
         meStore.refreshMe()
         router.push(returnTo || '/')
@@ -57,7 +54,9 @@ export const SignInPage = defineComponent({
 
       disabled()
       await http
-        .post('/validation_codes', { email: formData.email }, {_autoLoading:true})
+        .post('/validation_codes', { email: formData.email } , {
+          _autoLoading: true
+        })
         .catch(onError)
         .finally(enable)
       // 成功
@@ -68,11 +67,11 @@ export const SignInPage = defineComponent({
       <MainLayout>{
         {
           title: () => '登录',
-          icon: () => <BackIcon/>,
+          icon: () => <BackIcon />,
           default: () => (
             <div class={s.wrapper}>
               <div class={s.logo}>
-                <Icon class={s.icon} name="orange" />
+                <Icon class={s.icon} name="mangosteen" />
                 <h1 class={s.appName}>橘子记账</h1>
               </div>
               <Form onSubmit={onSubmit}>

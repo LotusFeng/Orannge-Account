@@ -1,11 +1,10 @@
 import { computed, defineComponent, PropType, reactive } from 'vue';
+import { Money } from '../../shared/Money';
 import s from './Bars.module.scss';
-import {Money} from '../../shared/Money';
-
 export const Bars = defineComponent({
   props: {
     data: {
-      type: Array as PropType<{ tag:Tag, amount:number, percent:number }[]>
+      type: Array as PropType<{tag:Tag, amount:number, percent: number}[]>
     }
   },
   setup: (props, context) => {
@@ -31,7 +30,7 @@ export const Bars = defineComponent({
             )
           }): <div>没有数据</div>
         }
-      </div>
+        </div>
     )
   }
 })
